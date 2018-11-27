@@ -1,0 +1,23 @@
+{
+  "name": "functionalprogrammingresit",
+  "version": "1.0.0",
+  "description": "Herkansing voor functional programming",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "functional",
+    "programming",
+    "d3",
+    "awesomeSauce"
+  ],
+  "author": "Marcel Fleuren",
+  "license": "ISC",
+  "dependencies": {
+    "@gijslaarman/oba-scraper": "^1.1.1",
+    "axios": "^0.18.0",
+    "dotenv": "^6.1.0",
+    "xml-to-json-promise": "0.0.3"
+  }
+}
