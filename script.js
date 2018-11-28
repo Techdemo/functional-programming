@@ -52,17 +52,19 @@ d3.json("dataset.json").then(data => {
 
   // sort data for the line
   let sortedDataYears = yearCount.sort();
-  console.log("sortedatayears", sortedDataYears);
 
   // d3 line path generator
   const line = d3
-    .line(sortedDataYears)
+    .line()
     // where the x coordinate of the line shoudl be
-    .x(d => {
+
+    .x(function(d) {
       return x(Number(d.key));
     })
-    .y(d => {
-      return y(Number(d.value));
+
+    // where the y coordinatie of the line shoudl be
+    .y(function(d) {
+      return y(d.value);
     });
 
   // line path element
@@ -76,15 +78,6 @@ d3.json("dataset.json").then(data => {
     .tickFormat(d3.format("d"));
   xAxisGroup.call(x_Axis);
   yAxisGroup.call(y_Axis);
-
-  // path data
-  path
-    .data([bookNested])
-    .attr("fill", "none")
-    .attr("stroke", "#00bfa5")
-    .attr("transform", "translate(42,0)")
-    .attr("stroke-width", 2)
-    .attr("d", line);
 
   // create circles for books by year
   const circles = svg
@@ -105,4 +98,17 @@ d3.json("dataset.json").then(data => {
     })
     .attr("fill", "white")
     .attr("transform", "translate(42,0)");
+
+  // sort data years
+  // let pathSorted = bookNested.sort((a, b) => a.key - b.value);
+  bookNested.sort(function(a, b) {
+    return a.key - b.key;
+  });
+  path
+    .data([bookNested])
+    .attr("fill", "none")
+    .attr("stroke", "#00bfa5")
+    .attr("transform", "translate(42,0)")
+    .attr("stroke-width", 2)
+    .attr("d", line);
 });
