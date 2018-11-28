@@ -1,5 +1,9 @@
 # Functional Programming
 
+![](/Users/marcelfleuren/functionalProgrammingResit/schermafbeelding.png)
+
+
+
 ## Inleiding
 
 Het toenemende aantal personen uit de Millenial generatie met burnout klachten, neemt ieder jaar weer toe. Het is op dit moment een veel besproken item en loop een willekeurige Bruna binnen en er ligt een stapeltje 'zelfhulp'boeken voor de millennial klaar. Ik was nieuwsgierig of er, dankzij de stijgende lijn van mensen met burnout klachten, er een  toename in het aantal publicaties over het onderwerp burnout in de oba terug te vinden is. 
