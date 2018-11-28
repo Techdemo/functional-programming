@@ -11,8 +11,9 @@ d3.json("dataset.json").then(data => {
   let allBooks = data.length;
 
   let bookYears = [...new Set(data.map(d => Number(d.Year)))];
-  console.log("alle jaren van de boeken", bookYears);
+  console.log("Object alle jaren van de boeken", bookYears);
   console.log("allbooks", allBooks);
+  console.log(Object.values(bookYears));
 
   // set the domains and ranges for the axis
   let y = d3
@@ -39,4 +40,15 @@ d3.json("dataset.json").then(data => {
   let x_Axis = d3.axisBottom(x).tickFormat(d3.format("d"));
   xAxisGroup.call(x_Axis);
   yAxisGroup.call(y_Axis);
+
+  // create circles for books by year
+  const circles = svg.selectAll("circle").data(data);
+
+  circles
+    .enter()
+    .append("circle")
+    .attr("r", 5)
+    .attr("cx", d)
+    .attr("cy", d => y)
+    .attr("fill", "white");
 });
