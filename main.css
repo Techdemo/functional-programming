@@ -8,7 +8,23 @@ h1 {
 }
 body {
   background-color: #222233;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .chart {
   padding: 50px;
+  display: flex;
+  align-self: flex-start;
+}
+svg {
+  align-self: center;
+}
+
+h2 {
+  color: white;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
 }
