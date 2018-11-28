@@ -13,7 +13,7 @@ d3.json("dataset.json").then(data => {
     .select(".chart")
     .append("svg")
     .attr("width", 1400)
-    .attr("height", 1400);
+    .attr("height", 1600);
 
   console.log(bookNested);
   let yearCount = bookNested.map(d => {
@@ -50,6 +50,24 @@ d3.json("dataset.json").then(data => {
     .attr("transform", "translate(40,0)")
     .attr("color", "white");
 
+  // sort data for the line
+  let sortedDataYears = yearCount.sort();
+  console.log("sortedatayears", sortedDataYears);
+
+  // d3 line path generator
+  const line = d3
+    .line(sortedDataYears)
+    // where the x coordinate of the line shoudl be
+    .x(d => {
+      return x(Number(d.key));
+    })
+    .y(d => {
+      return y(Number(d.value));
+    });
+
+  // line path element
+  const path = svg.append("path");
+
   // create and call the axisLeft
   let y_Axis = d3.axisLeft().scale(y);
   let x_Axis = d3
@@ -58,6 +76,15 @@ d3.json("dataset.json").then(data => {
     .tickFormat(d3.format("d"));
   xAxisGroup.call(x_Axis);
   yAxisGroup.call(y_Axis);
+
+  // path data
+  path
+    .data([bookNested])
+    .attr("fill", "none")
+    .attr("stroke", "#00bfa5")
+    .attr("transform", "translate(42,0)")
+    .attr("stroke-width", 2)
+    .attr("d", line);
 
   // create circles for books by year
   const circles = svg
@@ -70,7 +97,6 @@ d3.json("dataset.json").then(data => {
     .enter()
     .append("circle")
     .attr("r", 5)
-    // .attr("cx", d => dataYears)
     .attr("cx", d => {
       return x(Number(d.key));
     })
