@@ -70,6 +70,23 @@ d3.json("dataset.json").then(data => {
   // line path element
   const path = svg.append("path");
 
+  const dottedLines = svg
+    .append("g")
+    .attr("class", "lines")
+    .style("opacity", 0);
+
+  const xDottedLine = dottedLines
+    .append("line")
+    .attr("stroke", "#aaa")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", 4);
+
+  const yDottedLine = dottedLines
+    .append("line")
+    .attr("stroke", "#aaa")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", 4);
+
   // create and call the axisLeft
   let y_Axis = d3.axisLeft().scale(y);
   let x_Axis = d3
@@ -99,8 +116,38 @@ d3.json("dataset.json").then(data => {
     .attr("fill", "white")
     .attr("transform", "translate(42,0)");
 
-  // sort data years
-  // let pathSorted = bookNested.sort((a, b) => a.key - b.value);
+  svg
+    .selectAll("circle")
+    .on("mouseover", (d, i, n) => {
+      d3.select(n[i])
+        .transition()
+        .duration(100)
+        .attr("r", 10);
+
+      xDottedLine
+        .attr("x1", x(Number(d.key)))
+        .attr("x2", x(Number(d.key)))
+        .attr("y1", 500)
+        .attr("y2", y(Number(d.value)))
+        .attr("transform", "translate(42,0)");
+      yDottedLine
+        .attr("x1", 0)
+        .attr("x2", x(Number(d.key)))
+        .attr("y1", y(Number(d.value)))
+        .attr("y2", y(Number(d.value)))
+        .attr("transform", "translate(42,0)");
+
+      dottedLines.style("opacity", 1);
+    })
+    .on("mouseleave", (d, i, n) => {
+      d3.select(n[i])
+        .transition()
+        .duration(100)
+        .attr("r", 5);
+
+      dottedLines.style("opacity", 0);
+    });
+
   bookNested.sort(function(a, b) {
     return a.key - b.key;
   });
